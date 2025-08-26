@@ -20,4 +20,16 @@ while shift !~ /\A\d+\z/
 end
 
 shifts = shift.to_i
-p shifts
+
+# using map to conert every letter
+result = input_from_user.chars.map do |char|
+  if char =~ /[A-Z]/ # Upcase letter
+    (((char.ord - 'A'.ord + shifts) % 26) + 'A'.ord).chr
+  elsif char =~ /[a-z]/ # Downcase letter
+    (((char.ord - 'a'.ord + shifts) % 26) + 'a'.ord).chr
+  else
+    char # characters that aren't letter go there
+  end
+end.join
+
+puts "Encrypted word: \e[34m#{result}\e[0m"
